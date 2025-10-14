@@ -1,7 +1,7 @@
 import os
 from openai import OpenAI
 from dotenv import load_dotenv
-from pydentic import BaseModel
+from pydantic import BaseModel
 load_dotenv()
 
 api_key = os.getenv("OPENAI_API_KEY")
@@ -23,4 +23,4 @@ print(response.output_text)
 class CalenderEvent(BaseModel):
     name: str
     date: str
-    participants: List[str]
+    participants: list[str]
