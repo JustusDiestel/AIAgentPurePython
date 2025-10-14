@@ -1,8 +1,11 @@
 from news_agent import NewsAgent
-
+from sentiment_agent import SentimentAgent
 
 if __name__ == "__main__":
-    agent = NewsAgent()
-    news = agent.get_news(input("Bitte UN eingeben: "))
-    for n in news:
-        print(f"{n['published']} \n {n['title']} \n ({n['source']})")
+    keyword = input("Bitte UN eingeben: ")
+    news_agent = NewsAgent()
+    articles = news_agent.get_news(keyword)
+
+    agent = SentimentAgent()
+    agent.perceive(articles)
+    agent.act()
