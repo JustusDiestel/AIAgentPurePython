@@ -1,6 +1,8 @@
 from news_agent import NewsAgent
 from sentiment_agent import SentimentAgent
 from stock_agent import StockAgent
+from nn_agent import TradingNN
+import torch
 
 
 if __name__ == "__main__":
@@ -9,12 +11,23 @@ if __name__ == "__main__":
     articles = news_agent.get_news(keyword)
 
     agent = SentimentAgent()
-    sentiment = agent.perceive(articles)
+    agent.perceive(articles)
+    sentiment = float(agent.think())
     agent.act() #Aktion mit Sentiment printet hier
 
 
 
     stock_agent = StockAgent(keyword)
-    print(stock_agent.getStockData()[0]['close'])
+    data = stock_agent.getStockData()
+    closeValues = [float(entry['close']) for entry in data]
+    print(closeValues[0])
+
+
+    model = TradingNN()
+    valueChange = closeValues[1] - closeValues[0]
+    x = torch.tensor([[sentiment,valueChange]], dtype=torch.float32)
+    pred = model(x)
+    action = ["BUY", "HOLD", "SELL"][torch.argmax(pred)]
+    print(action)
 
 
