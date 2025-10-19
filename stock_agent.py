@@ -4,7 +4,7 @@ import requests
 
 ''' Hier die DOCU der API: https://marketstack.com/documentation_v2 
     
-    Eigentlich brauch ich hier noch eine API / AI-Agent der mir das keyword in den richtigen Börsenkürtzel umwandel!
+    Eigentlich brauch ich hier noch eine API / AI-Agent der mir das keyword in den richtigen Börsenkürtzel umwandel! oder eine Map mit den S&P500
 '''
 
 
@@ -29,7 +29,10 @@ class StockAgent():
             return []
         else:
             data = response.json()
-            print(data)
-            return []
+            if "data" in data:
+                return data["data"]
+            else:
+                print("Fehlerhafte Antwort:", data)
+                return []
 
     #def getMarktSegmentData(self):

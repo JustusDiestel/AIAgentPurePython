@@ -54,8 +54,8 @@ class SentimentAgent:
     def act(self):
         trend = self.think()
         if trend > 0.2:
-            print(f" Marktstimmung POSITIV ({trend:.2f})")
+            print(f" Marktstimmung Positiv ({trend:.2f})")
         elif trend < -0.2:
-            print(f" Marktstimmung NEGATIV ({trend:.2f})")
+            print(f" Marktstimmung Negativ ({trend:.2f})")
         else:
-            print(f" Marktstimmung NEUTRAL ({trend:.2f})")
+            print(f" Marktstimmung Neutral ({trend:.2f})")
